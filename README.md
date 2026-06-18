@@ -1,8 +1,8 @@
-# PortFolio
+# 🌐 Personal Portfolio
+
+
 My personal portfolio website highlighting web development projects, skills, education, certifications, and contact information.
 
-
-# 🌐 Personal Portfolio
 
 Welcome to my personal portfolio website!
 
