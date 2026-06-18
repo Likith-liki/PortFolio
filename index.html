@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Metla Likith Kumar Reddy — Full-Stack Developer</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0b0e17;
+    --surface: #121726;
+    --surface2: #1a2236;
+    --border: rgba(255,255,255,0.08);
+    --accent: #6c8fff;
+    --accent2: #a78bfa;
+    --text: #e8eaf0;
+    --muted: #7a84a0;
+    --tag-bg: rgba(108,143,255,0.12);
+    --tag-color: #8faeff;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 6vw;
+    background: rgba(11,14,23,0.82);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 700;
+    color: var(--text); text-decoration: none; letter-spacing: -0.02em;
+  }
+  .nav-logo span { color: var(--accent); }
+  nav ul { list-style: none; display: flex; gap: 2rem; }
+  nav ul a {
+    text-decoration: none; color: var(--muted); font-size: 0.88rem;
+    transition: color 0.2s; letter-spacing: 0.02em;
+  }
+  nav ul a:hover { color: var(--text); }
+
+  /* SECTIONS */
+  section { padding: 6rem 6vw; max-width: 1100px; margin: 0 auto; }
+
+  /* HERO */
+  #hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding-top: 5rem; max-width: 100%; margin: 0; padding-left: 6vw; padding-right: 6vw;
+    position: relative;
+  }
+  .hero-inner {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 3rem; width: 100%;
+  }
+  .hero-content { flex: 1; min-width: 0; }
+  .hero-photo-wrap {
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  }
+  .hero-photo {
+    width: 280px; height: 280px; border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(108,143,255,0.35);
+    box-shadow: 0 0 40px rgba(108,143,255,0.18);
+    display: block;
+  }
+  .hero-photo-placeholder {
+    width: 280px; height: 280px; border-radius: 50%;
+    background: var(--surface2);
+    border: 3px dashed rgba(108,143,255,0.3);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 0.5rem; color: var(--muted); font-size: 0.82rem; text-align: center; padding: 1rem;
+  }
+  .hero-photo-placeholder svg { width: 40px; height: 40px; opacity: 0.4; }
+  @media (max-width: 860px) {
+    .hero-photo-wrap { display: none; }
+    .hero-inner { flex-direction: column; align-items: flex-start; }
+  }
+  .hero-eyebrow {
+    font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 1.2rem;
+    display: flex; align-items: center; gap: 0.6rem;
+  }
+  .hero-eyebrow::before {
+    content: ''; display: inline-block; width: 28px; height: 1px; background: var(--accent);
+  }
+  h1 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(2.6rem, 6vw, 4.4rem);
+    font-weight: 700; line-height: 1.08; letter-spacing: -0.03em;
+    max-width: 820px; margin-bottom: 1.4rem;
+  }
+  h1 .highlight {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  .hero-sub {
+    color: var(--muted); font-size: 1.08rem; max-width: 520px;
+    margin-bottom: 2.4rem; line-height: 1.8;
+  }
+  .hero-cta {
+    display: flex; gap: 1rem; flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    padding: 0.72rem 1.6rem; border-radius: 8px;
+    font-size: 0.88rem; font-weight: 500; text-decoration: none !important;
+    cursor: pointer; transition: all 0.2s; border: none; font-family: inherit;
+  }
+  .btn-primary {
+    background: var(--accent); color: #0b0e17;
+  }
+  .btn-primary:hover { background: #8faeff; transform: translateY(-1px); }
+  .btn-outline {
+    background: transparent; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    padding-top: 2.4rem; border-top: 1px solid var(--border);
+    flex-wrap: wrap;
+  }
+  .stat-num {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 2rem; font-weight: 700; color: var(--text); letter-spacing: -0.03em;
+  }
+  .stat-label { font-size: 0.8rem; color: var(--muted); letter-spacing: 0.04em; margin-top: 2px; }
+
+  /* AMBIENT BG */
+  .glow {
+    position: fixed; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(108,143,255,0.07) 0%, transparent 70%);
+    border-radius: 50%; top: -100px; right: -100px; pointer-events: none; z-index: 0;
+  }
+
+  /* SECTION HEADERS */
+  .section-label {
+    font-size: 0.78rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--accent); font-weight: 500; margin-bottom: 0.5rem;
+  }
+  h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1.7rem, 3.5vw, 2.4rem);
+    font-weight: 700; letter-spacing: -0.025em;
+    margin-bottom: 3rem; line-height: 1.2;
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start;
+  }
+  .about-text p { color: var(--muted); margin-bottom: 1rem; font-size: 0.97rem; }
+  .about-text p:last-child { margin-bottom: 0; }
+  .about-links { display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1.6rem; }
+  .about-link {
+    display: flex; align-items: center; gap: 0.6rem;
+    color: var(--muted); font-size: 0.88rem; text-decoration: none;
+    transition: color 0.2s;
+  }
+  .about-link:hover { color: var(--accent); }
+  .about-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+  .info-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.8rem;
+  }
+  .info-row {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 0.7rem 0; border-bottom: 1px solid var(--border); font-size: 0.88rem;
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-row span:first-child { color: var(--muted); }
+  .info-row span:last-child { color: var(--text); font-weight: 500; text-align: right; }
+
+  /* SKILLS */
+  .skills-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.2rem;
+  }
+  .skill-group {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.4rem;
+  }
+  .skill-group-title {
+    font-size: 0.75rem; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--accent); font-weight: 600; margin-bottom: 1rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .tag {
+    background: var(--tag-bg); color: var(--tag-color);
+    font-size: 0.8rem; padding: 0.3rem 0.7rem; border-radius: 6px;
+    font-weight: 500; border: 1px solid rgba(108,143,255,0.18);
+  }
+
+  /* PROJECTS */
+  .projects-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem;
+  }
+  .project-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 2rem;
+    transition: border-color 0.25s, transform 0.2s;
+    display: flex; flex-direction: column;
+  }
+  .project-card:hover { border-color: rgba(108,143,255,0.35); transform: translateY(-3px); }
+  .project-icon {
+    width: 44px; height: 44px; border-radius: 10px;
+    background: var(--tag-bg); display: flex; align-items: center; justify-content: center;
+    margin-bottom: 1.2rem; font-size: 1.3rem;
+  }
+  .project-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1.1rem; font-weight: 600; margin-bottom: 0.6rem;
+  }
+  .project-desc { color: var(--muted); font-size: 0.88rem; margin-bottom: 1.4rem; flex: 1; }
+  .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.4rem; }
+  .project-links { display: flex; gap: 0.75rem; }
+  .project-link {
+    display: inline-flex; align-items: center; gap: 0.35rem;
+    font-size: 0.82rem; color: var(--accent); text-decoration: none;
+    transition: color 0.2s;
+  }
+  .project-link:hover { color: var(--accent2); }
+
+  /* EXPERIENCE */
+  .exp-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2rem;
+    position: relative; overflow: hidden;
+  }
+  .exp-card::before {
+    content: ''; position: absolute; left: 0; top: 0; bottom: 0;
+    width: 3px; background: linear-gradient(to bottom, var(--accent), var(--accent2));
+    border-radius: 2px;
+  }
+  .exp-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.4rem; }
+  .exp-role {
+    font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 600;
+  }
+  .exp-date { font-size: 0.8rem; color: var(--accent); font-weight: 500; }
+  .exp-company { color: var(--muted); font-size: 0.88rem; margin-bottom: 1rem; }
+  .exp-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .exp-list li {
+    display: flex; gap: 0.7rem; font-size: 0.88rem; color: var(--muted); align-items: flex-start;
+  }
+  .exp-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+
+  /* CERTS */
+  .certs-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem;
+  }
+  .cert-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 1.4rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .cert-card:hover { border-color: rgba(108,143,255,0.3); }
+  .cert-icon {
+    width: 36px; height: 36px; border-radius: 8px;
+    background: var(--tag-bg); display: flex; align-items: center; justify-content: center;
+    font-size: 1rem; flex-shrink: 0;
+  }
+  .cert-name { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .cert-issuer { font-size: 0.78rem; color: var(--muted); }
+
+  /* EDUCATION */
+  .edu-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 14px; padding: 2rem;
+    display: flex; gap: 1.5rem; align-items: flex-start;
+  }
+  .edu-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(108,143,255,0.2), rgba(167,139,250,0.2));
+    display: flex; align-items: center; justify-content: center; font-size: 1.4rem; flex-shrink: 0;
+  }
+  .edu-degree { font-family: 'Space Grotesk', sans-serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .edu-school { color: var(--muted); font-size: 0.88rem; margin-bottom: 0.6rem; }
+  .edu-meta { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .edu-badge {
+    font-size: 0.78rem; padding: 0.25rem 0.65rem; border-radius: 20px;
+    background: var(--tag-bg); color: var(--tag-color); font-weight: 500;
+  }
+
+  /* CONTACT */
+  #contact {
+    text-align: center;
+  }
+  #contact h2 { margin-bottom: 0.8rem; }
+  .contact-sub { color: var(--muted); margin-bottom: 2.4rem; }
+  .contact-links {
+    display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem;
+  }
+  .contact-card {
+    display: flex; align-items: center; gap: 0.6rem;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 0.8rem 1.4rem;
+    color: var(--text); text-decoration: none; font-size: 0.88rem;
+    transition: all 0.2s;
+  }
+  .contact-card:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+  .contact-card svg { width: 18px; height: 18px; }
+
+  /* FOOTER */
+  footer {
+    border-top: 1px solid var(--border);
+    text-align: center; padding: 2rem 6vw;
+    color: var(--muted); font-size: 0.82rem;
+  }
+
+  /* SCROLL REVEAL */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none; flex-direction: column; gap: 5px;
+    cursor: pointer; padding: 4px; background: none; border: none;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 2px;
+    background: var(--text); border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MOBILE DRAWER */
+  .mobile-menu {
+    display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(11,14,23,0.97); z-index: 99;
+    flex-direction: column; align-items: center; justify-content: center; gap: 2.4rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    text-decoration: none; color: var(--text);
+    font-family: 'Space Grotesk', sans-serif; font-size: 1.6rem; font-weight: 600;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--accent); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 860px) {
+    /* Nav */
+    nav ul { display: none; }
+    .hamburger { display: flex; }
+
+    /* Hero */
+    .hero-photo-wrap { display: none; }
+    .hero-inner { flex-direction: column; align-items: flex-start; }
+    #hero { padding-top: 6rem; min-height: auto; padding-bottom: 4rem; }
+    h1 { font-size: clamp(2rem, 8vw, 3rem); }
+    .hero-sub { font-size: 0.97rem; max-width: 100%; }
+    .hero-cta { flex-direction: column; width: 100%; }
+    .btn { justify-content: center; width: 100%; text-align: center; padding: 0.9rem 1.6rem; font-size: 0.95rem; }
+
+    /* Sections */
+    section { padding: 4rem 5vw; }
+    h2 { font-size: clamp(1.5rem, 6vw, 2rem); margin-bottom: 2rem; }
+
+    /* About */
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+
+    /* Skills */
+    .skills-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+
+    /* Projects */
+    .projects-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+
+    /* Experience */
+    .exp-header { flex-direction: column; gap: 0.3rem; }
+    .exp-card { padding: 1.4rem; }
+
+    /* Education */
+    .edu-card { flex-direction: column; gap: 1rem; padding: 1.4rem; }
+
+    /* Certs */
+    .certs-grid { grid-template-columns: 1fr; gap: 0.8rem; }
+
+    /* Contact */
+    #contact { text-align: left; }
+    .contact-links { justify-content: flex-start; flex-direction: column; }
+    .contact-card { width: 100%; justify-content: flex-start; }
+    #contact .btn { width: auto; display: inline-flex; }
+
+    /* Info card text wrapping */
+    .info-row { flex-direction: column; gap: 0.2rem; }
+    .info-row span:last-child { text-align: left; }
+  }
+
+  @media (max-width: 480px) {
+    .skills-grid { grid-template-columns: 1fr; }
+    nav { padding: 1rem 5vw; }
+  }
+</style>
+</head>
+<body>
+
+<div class="glow"></div>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#hero">LK<span>.</span></a>
+  <ul>
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU DRAWER -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" class="mobile-nav-link">About</a>
+  <a href="#skills" class="mobile-nav-link">Skills</a>
+  <a href="#projects" class="mobile-nav-link">Projects</a>
+  <a href="#experience" class="mobile-nav-link">Experience</a>
+  <a href="#contact" class="mobile-nav-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-eyebrow">Full-Stack Developer</div>
+      <h1>Building things for<br/>the <span class="highlight">web that work</span></h1>
+      <p class="hero-sub">I'm Likith — a CSE student and MERN stack developer crafting scalable web applications with clean code and thoughtful UX.</p>
+      <div class="hero-cta">
+        <a href="https://drive.google.com/file/d/1j56Aa2DpAMKIn_z0r-_Aw4xkzwULX4v8/view?usp=sharing" target="_blank" class="btn btn-primary">View Resume →</a>
+        <a href="https://drive.google.com/uc?export=download&id=1j56Aa2DpAMKIn_z0r-_Aw4xkzwULX4v8" class="btn btn-outline">⬇ Download Resume</a>
+      </div>
+    </div>
+    <div class="hero-photo-wrap">
+      <!-- To add your photo: replace the placeholder div below with: -->
+           <img src="./images/profile.png" alt="Likith" class="hero-photo" /> 
+      <!-- <div class="hero-photo-placeholder">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Your photo here
+      </div> -->
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">Who I Am</div>
+  <h2>A developer who cares<br/>about the details</h2>
+  <div class="about-grid reveal">
+    <div class="about-text">
+      <p>I'm Metla Likith Kumar Reddy, a B.Tech Computer Science student at G. Pullaiah College of Engineering and Technology, Kurnool — currently in my second year with a CGPA of 8.8.</p>
+      <p>I build full-stack web applications using the MERN stack, with a focus on clean architecture, secure authentication, and production-ready deployments. I'm also a certified ServiceNow System Administrator and Application Developer.</p>
+      <p>Outside code, you'll find me playing cricket, listening to music, or vibe coding late into the night.</p>
+      <div class="about-links">
+        <a class="about-link" href="https://github.com/Likith-liki" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          github.com/Likith-liki
+        </a>
+        <a class="about-link" href="https://linkedin.com/in/metla-likith-kumar-reddy-4b0820343" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn Profile
+        </a>
+        <a class="about-link" href="https://leetcode.com/u/23ATA05215" target="_blank">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+          LeetCode Profile
+        </a>
+        <a class="about-link" href="mailto:likithlikith000000@gmail.com">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          likithlikith000000@gmail.com
+        </a>
+      </div>
+    </div>
+
+    <div class="info-card">
+      <div class="info-row"><span>Location</span><span>Kurnool, Andhra Pradesh</span></div>
+      <div class="info-row"><span>Degree</span><span>B.Tech CSE (2023–2027)</span></div>
+      <div class="info-row"><span>College</span><span>GPCET, Kurnool</span></div>
+      <div class="info-row"><span>CGPA</span><span>8.8 / 10</span></div>
+      <div class="info-row"><span>Core Stack</span><span>MERN + ServiceNow</span></div>
+      <div class="info-row"><span>Status</span><span style="color:#4ade80">● Open to opportunities</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-label">What I Know</div>
+  <h2>Technical skills</h2>
+  <div class="skills-grid reveal">
+    <div class="skill-group">
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-tags">
+        <span class="tag">C</span>
+        <span class="tag">Java</span>
+        <span class="tag">Python</span>
+        <span class="tag">JavaScript</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Frontend</div>
+      <div class="skill-tags">
+        <span class="tag">HTML5</span>
+        <span class="tag">CSS3</span>
+        <span class="tag">React.js</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Backend</div>
+      <div class="skill-tags">
+        <span class="tag">Node.js</span>
+        <span class="tag">Express.js</span>
+        <span class="tag">REST APIs</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Databases</div>
+      <div class="skill-tags">
+        <span class="tag">MongoDB</span>
+        <span class="tag">MySQL</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Tools</div>
+      <div class="skill-tags">
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">Postman</span>
+        <span class="tag">Vercel</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-title">Platforms</div>
+      <div class="skill-tags">
+        <span class="tag">ServiceNow</span>
+        <span class="tag">Agentic AI</span>
+        <span class="tag">ATF</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">What I've Built</div>
+  <h2>Projects</h2>
+  <div class="projects-grid reveal">
+
+    <div class="project-card">
+      <div class="project-icon">📝</div>
+      <div class="project-title">Notes Sharing Web App</div>
+      <div class="project-desc">A full-stack platform for sharing notes with secure JWT authentication, role-based access control for Admin and User roles, file uploads, and password management. Deployed on Vercel.</div>
+      <div class="project-tags">
+        <span class="tag">React.js</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Express.js</span>
+        <span class="tag">MongoDB</span>
+        <span class="tag">Vercel</span>
+      </div>
+      <div class="project-links">
+        <a class="project-link" href="https://your-project.vercel.app" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          View on GitHub
+        </a>
+        <a class="project-link" href="https://notes-sharing-app-gamma.vercel.app/" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"     stroke-width="2">
+            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+            <polyline points="15 3 21 3 21 9"/>
+            <line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+          Live Demo
+        </a>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-icon">🛒</div>
+      <div class="project-title">Supermarket Mini Project</div>
+      <div class="project-desc">A full-stack Supermarket Management System with user authentication, role-based dashboards, and complete product management — add, update, delete, and list — built using MVC architecture.</div>
+      <div class="project-tags">
+        <span class="tag">Node.js</span>
+        <span class="tag">Express.js</span>
+        <span class="tag">EJS</span>
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+      </div>
+      <div class="project-links">
+        <a class="project-link" href="https://github.com/Likith-liki/Supermarket-Mini-Project" target="_blank">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+          View on GitHub
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-label">Experience</div>
+  <h2>Work & Internships</h2>
+  <div class="exp-card reveal">
+    <div class="exp-header">
+      <div class="exp-role">System Administrator Intern</div>
+      <div class="exp-date">Apr 2026</div>
+    </div>
+    <div class="exp-company">ServiceNow University × SmartBridge — Virtual Internship Program</div>
+    <ul class="exp-list">
+      <li>Completed the program covering ServiceNow Administration Fundamentals, Agentic AI, and Introduction to Flows</li>
+      <li>Gained hands-on experience with Automated Test Framework (ATF) Essentials and ServiceNow Micro Certification</li>
+      <li>Prepared for and successfully completed the Certified System Administrator (CSA) Exam</li>
+      <li>Worked with reporting tools, workflows, and platform configuration in a live ServiceNow environment</li>
+    </ul>
+    <div style="margin-top:1.2rem; display:flex; gap:0.5rem; flex-wrap:wrap;">
+      <span class="tag">ServiceNow</span>
+      <span class="tag">ATF</span>
+      <span class="tag">Agentic AI</span>
+      <span class="tag">Flows</span>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="section-label">Education</div>
+  <h2>Academic background</h2>
+  <div class="edu-card reveal">
+    <div class="edu-icon">🎓</div>
+    <div>
+      <div class="edu-degree">B.Tech — Computer Science & Engineering</div>
+      <div class="edu-school">G. Pullaiah College of Engineering and Technology, Kurnool, A.P.</div>
+      <div class="edu-meta">
+        <span class="edu-badge">2023 – 2027</span>
+        <span class="edu-badge">CGPA: 8.8 / 10</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATIONS -->
+<section id="certs">
+  <div class="section-label">Credentials</div>
+  <h2>Certifications</h2>
+  <div class="certs-grid reveal">
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Certified System Administrator (CSA)</div>
+        <div class="cert-issuer">ServiceNow</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">🏅</div>
+      <div>
+        <div class="cert-name">Certified Application Developer (CAD)</div>
+        <div class="cert-issuer">ServiceNow</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📜</div>
+      <div>
+        <div class="cert-name">Full Stack Web Development — MERN</div>
+        <div class="cert-issuer">PrepInsta</div>
+      </div>
+    </div>
+    <div class="cert-card">
+      <div class="cert-icon">📜</div>
+      <div>
+        <div class="cert-name">Node.js</div>
+        <div class="cert-issuer">PrepInsta</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-label">Let's Connect</div>
+  <h2>Get in touch</h2>
+  <p class="contact-sub">Open to internships, collaborations, and full-time opportunities.<br/>Drop me a message and I'll get back to you.</p>
+  <div class="contact-links">
+    <a class="contact-card" href="mailto:likithlikith000000@gmail.com">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      Email Me
+    </a>
+    <a class="contact-card" href="https://linkedin.com/in/metla-likith-kumar-reddy-4b0820343" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+      LinkedIn
+    </a>
+    <a class="contact-card" href="https://github.com/Likith-liki" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+      GitHub
+    </a>
+    <a class="contact-card" href="https://leetcode.com/u/23ATA05215" target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13.483 0a1.374 1.374 0 0 0-.961.438L7.116 6.226l-3.854 4.126a5.266 5.266 0 0 0-1.209 2.104 5.35 5.35 0 0 0-.125.513 5.527 5.527 0 0 0 .062 2.362 5.83 5.83 0 0 0 .349 1.017 5.938 5.938 0 0 0 1.271 1.818l4.277 4.193.039.038c2.248 2.165 5.852 2.133 8.063-.074l2.396-2.392c.54-.54.54-1.414.003-1.955a1.378 1.378 0 0 0-1.951-.003l-2.396 2.392a3.021 3.021 0 0 1-4.205.038l-.02-.019-4.276-4.193c-.652-.64-.972-1.469-.948-2.263a2.68 2.68 0 0 1 .066-.523 2.545 2.545 0 0 1 .619-1.164L9.13 8.114c1.058-1.134 3.204-1.27 4.43-.278l3.501 2.831c.593.48 1.461.387 1.94-.207a1.384 1.384 0 0 0-.207-1.943l-3.5-2.831c-.8-.647-1.766-1.045-2.774-1.202l2.015-2.158A1.384 1.384 0 0 0 13.483 0zm-2.866 12.815a1.38 1.38 0 0 0-1.38 1.382 1.38 1.38 0 0 0 1.38 1.382H20.79a1.38 1.38 0 0 0 1.38-1.382 1.38 1.38 0 0 0-1.38-1.382z"/></svg>
+      LeetCode
+    </a>
+  </div>
+  <a class="btn btn-primary" href="mailto:likithlikith000000@gmail.com" style="display:inline-flex;">Send a Message →</a>
+</section>
+
+<footer>
+  <p>Designed & built by Metla Likith Kumar Reddy · 2025</p>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  reveals.forEach(r => observer.observe(r));
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    mobileMenu.classList.toggle('open');
+    document.body.style.overflow = mobileMenu.classList.contains('open') ? 'hidden' : '';
+  });
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    });
+  });
+</script>
+</body>
+</html>
